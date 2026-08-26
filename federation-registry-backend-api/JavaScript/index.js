@@ -106,7 +106,7 @@ app.use(expressWinston.logger({
     ],
     format: winston.format.combine(
       winston.format.timestamp(),
-      winston.format.json()
+      winston.format.printf((info) => JSON.stringify(info).replace(/\\n|\r?\n/g, ' | '))
     ),
     level: function (req,res) {
       return 'info';
@@ -160,7 +160,7 @@ app.use(expressWinston.errorLogger({
       ],
       format: winston.format.combine(
         winston.format.timestamp(),
-        winston.format.json()
+        winston.format.printf((info) => JSON.stringify(info).replace(/\\n|\r?\n/g, ' | '))
       ),
       meta:true,
       metaField:null,
