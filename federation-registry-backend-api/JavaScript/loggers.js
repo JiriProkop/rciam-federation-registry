@@ -1,4 +1,5 @@
 var winston = require('winston');
+var {oneLineJson} = require('./logFormat');
 var logPath = __dirname + "/logs/logs.log";
 
 
@@ -35,7 +36,7 @@ const customLogger = (req,res,level,message,data)=>{
 const logger = winston.createLogger({
   format: winston.format.combine(
     winston.format.timestamp(),
-    winston.format.printf((info) => JSON.stringify(info).replace(/\\n|\r?\n/g, ' | '))
+    oneLineJson
   ),
   transports: [
     new winston.transports.Console({'timestamp':true}),
